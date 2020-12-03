@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: homework-tracker
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./niuniu
+    username: sa
+  flyway:
+    enabled: true
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+
+server:
+  port: 4567
+
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: homework-tracker API
+  try-host: http://localhost:${server.port}
