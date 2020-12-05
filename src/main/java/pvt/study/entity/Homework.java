@@ -19,7 +19,7 @@ public class Homework {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date completeTime;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date begin;
+    private Date beginTime;
     @JsonIgnore
     private Date loadTime;
     @JsonIgnore

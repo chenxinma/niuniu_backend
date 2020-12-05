@@ -45,7 +45,7 @@ public class HomeworkService {
             repository.saveHomeworkLink(id, homework.getSubjectId());
             return id;
         } else {
-            repository.updateCompleteTime(homework.getId(), homework.getCompleteTime());
+            repository.updateTimeRange(homework.getId(), homework.getBeginTime(), homework.getCompleteTime());
             return homework.getId();
         }
     }
@@ -57,8 +57,8 @@ public class HomeworkService {
         repository.deleteHomeworkSubjectLinks(id);
     }
 
-    public void clearCompleteTime(int id) {
-        repository.updateCompleteTime(id, null);
+    public void clearTime(int id) {
+        repository.updateTimeRange(id, null, null);
     }
 
     public Optional<Homework> findById(int id) {

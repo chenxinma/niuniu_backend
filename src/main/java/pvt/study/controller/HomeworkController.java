@@ -32,9 +32,9 @@ public class HomeworkController {
         return ResponseEntity.ok(id);
     }
 
-    @DeleteMapping("/homework/{id}/complete_time")
+    @DeleteMapping("/homework/{id}/time_range")
     public ResponseEntity<Integer> clearCompleteTime(@PathVariable("id") int id) {
-        service.clearCompleteTime(id);
+        service.clearTime(id);
         return ResponseEntity.ok(id);
     }
 

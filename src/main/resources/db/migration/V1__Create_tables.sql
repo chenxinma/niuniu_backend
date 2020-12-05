@@ -3,7 +3,7 @@
 CREATE TABLE hub_exercise (
 	hub_exercise_id INTEGER auto_increment,
 	load_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	load_source TEXT,
+	load_source varchar(100),
 	CONSTRAINT hub_exercise_PK PRIMARY KEY (hub_exercise_id)
 );
 
@@ -14,7 +14,7 @@ CREATE TABLE hub_homework (
 	hub_homework_id INTEGER auto_increment,
 	publish_date DATE,
 	load_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	load_source TEXT,
+	load_source varchar(100),
 	CONSTRAINT hub_homework_PK PRIMARY KEY (hub_homework_id)
 );
 
@@ -23,9 +23,9 @@ CREATE TABLE hub_homework (
 
 CREATE TABLE hub_subject (
 	hub_subject_id INTEGER auto_increment,
-	subject TEXT(50),
+	subject varchar(50),
 	load_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	load_source TEXT,
+	load_source varchar(100),
 	CONSTRAINT hub_subject_PK PRIMARY KEY (hub_subject_id)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE hub_subject (
 CREATE TABLE hun_reward (
 	hub_reward_id INTEGER auto_increment,
 	load_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	load_source TEXT,
+	load_source varchar(100),
 	CONSTRAINT hun_reward_PK PRIMARY KEY (hub_reward_id)
 );
 
@@ -68,8 +68,9 @@ CREATE TABLE lnk_homework_subject (
 
 CREATE TABLE sat_exercise (
 	hub_exercise_id INTEGER NOT NULL,
-	grade TEXT,
-	approval_date DATE, title TEXT(100),
+	grade varchar(50),
+	approval_date DATE,
+	title varchar(100),
 	CONSTRAINT sat_exercise_PK PRIMARY KEY (hub_exercise_id),
 	CONSTRAINT sat_exercise_FK FOREIGN KEY (hub_exercise_id) REFERENCES hub_exercise(hub_exercise_id) ON DELETE CASCADE
 );
@@ -90,7 +91,7 @@ CREATE TABLE sat_homework (
 
 CREATE TABLE sat_reward (
 	hub_reward_id INTEGER NOT NULL,
-	content TEXT,
+	content varchar(200),
 	approval_date DATE,
 	CONSTRAINT sat_reward_PK PRIMARY KEY (hub_reward_id),
 	CONSTRAINT sat_reward_FK FOREIGN KEY (hub_reward_id) REFERENCES hun_reward(hub_reward_id)

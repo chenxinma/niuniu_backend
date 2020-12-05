@@ -16,6 +16,7 @@ public interface HomeworkRepository extends Repository<Homework, Integer> {
     @Query("SELECT " +
             " hhw.hub_homework_id as id, " +
             " hhw.publish_date, " +
+            " shw.begin_time" +
             " shw.complete_time" +
             " FROM " +
             " hub_homework hhw " +
@@ -26,7 +27,7 @@ public interface HomeworkRepository extends Repository<Homework, Integer> {
     Optional<Homework> findFirstById(@Param("id") int id);
 
     @Query("SELECT " +
-            " hhw.hub_homework_id as id, hhw.publish_date, shw.complete_time " +
+            " hhw.hub_homework_id as id, hhw.publish_date, shw.begin_time, shw.complete_time " +
             " FROM hub_homework hhw " +
             "  inner join sat_homework shw " +
             "  on hhw.hub_homework_id =shw.hub_homework_id " +
@@ -35,8 +36,8 @@ public interface HomeworkRepository extends Repository<Homework, Integer> {
 
     @Modifying
     @Transactional
-    @Query("update sat_homework set complete_time=:complete_time where hub_homework_id=:id")
-    void updateCompleteTime(@Param("id") int id, @Param("complete_time") Date completeTime);
+    @Query("update sat_homework set begin_time=:begin_time, complete_time=:complete_time where hub_homework_id=:id")
+    void updateTimeRange(@Param("id") int id, @Param("begin_time") Date beginTime, @Param("complete_time") Date completeTime);
 
 
     @Modifying
