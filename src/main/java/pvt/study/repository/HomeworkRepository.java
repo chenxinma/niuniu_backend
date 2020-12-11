@@ -1,6 +1,5 @@
 package pvt.study.repository;
 
-import org.apache.ibatis.annotations.Insert;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.Repository;

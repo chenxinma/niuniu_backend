@@ -16,4 +16,15 @@ public interface SubjectRepository extends Repository<Subject, Integer> {
             "inner join lnk_homework_subject lhs on hs.hub_subject_id = lhs.hub_subject_id " +
             "where lhs.hub_homework_id = :id")
     Optional<Subject> findByHomeworkId(@Param("id") int id);
+
+    @Query("SELECT " +
+            " hs.hub_subject_id AS id, " +
+            " hs.subject " +
+            "FROM " +
+            " hub_subject hs " +
+            "INNER JOIN LNK_EXERCISE_SUBJECT les ON " +
+            " hs.hub_subject_id = les.hub_subject_id " +
+            "WHERE " +
+            " les.HUB_EXERCISE_ID = :id")
+    Optional<Subject> findByExerciseId(@Param("id") int id);
 }
