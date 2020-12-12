@@ -55,9 +55,9 @@ public class ExerciseService {
 
     @Transactional
     public void delete(int id) {
-        repository.deleteExerciseHub(id);
-        repository.deleteExerciseSat(id);
         repository.deleteExerciseSubjectLinks(id);
+        repository.deleteExerciseSat(id);
+        repository.deleteExerciseHub(id);
     }
 
     public Optional<Exercise> findById(int id) {
@@ -78,7 +78,9 @@ public class ExerciseService {
     }
 
     public List<Exercise> findByApprovalDateRange(Date begin, Date end) {
-        return repository.findByApprovalDateRange(begin, end);
+        List<Exercise> exercises = repository.findByApprovalDateRange(begin, end);
+        exercises.forEach(this::setSubject);
+        return exercises;
     }
 
 

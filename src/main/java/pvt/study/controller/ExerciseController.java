@@ -45,7 +45,7 @@ public class ExerciseController {
     }
 
     @GetMapping("/exercise")
-    public List<Exercise> findByPublishDate(@RequestParam(name = "approvalDate")
+    public List<Exercise> findByApprovalDate(@RequestParam(name = "approvalDate")
                                             @DateTimeFormat(pattern="yyyy-MM-dd") Date approvalDate) {
         return service.findByApprovalDate(approvalDate);
     }

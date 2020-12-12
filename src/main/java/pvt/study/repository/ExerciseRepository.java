@@ -53,7 +53,7 @@ public interface ExerciseRepository extends Repository<Exercise, Integer> {
     List<Exercise> findByApprovalDateRange(@Param("begin") Date begin, @Param("end") Date end);
 
     @Modifying
-    @Query("INSERT INTO HUB_EXERCISE " +
+    @Query("INSERT INTO SAT_EXERCISE " +
             "(HUB_EXERCISE_ID, GRADE, APPROVAL_DATE, TITLE) " +
             "VALUES(:id, :grade, :approval_date, :title)")
     Integer saveExerciseSat(@Param("id") int id, @Param("grade") String grade,

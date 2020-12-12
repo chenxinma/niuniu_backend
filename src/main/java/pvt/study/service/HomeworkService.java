@@ -52,9 +52,9 @@ public class HomeworkService {
 
     @Transactional
     public void delete(int id) {
-        repository.deleteHomeworkHub(id);
-        repository.deleteHomeworkSat(id);
         repository.deleteHomeworkSubjectLinks(id);
+        repository.deleteHomeworkSat(id);
+        repository.deleteHomeworkHub(id);
     }
 
     public void clearTime(int id) {
