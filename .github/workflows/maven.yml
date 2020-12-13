@@ -32,12 +32,12 @@ jobs:
         # The desired behavior if no files are found using the provided path.
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.6
         with:
-          # Artifact name
-          name: homework_tracker # optional
+          name: homework_tracker 
       - name: upload
         uses: easingthemes/ssh-deploy@v2.1.5
         with: 
