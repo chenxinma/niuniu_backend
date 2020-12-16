@@ -40,7 +40,7 @@ public class ExerciseService {
                     "(LOAD_TIME, LOAD_SOURCE) " +
                     "VALUES(:load_time, :load_source)";
             namedParameterJdbcTemplate.update(INSERT_SQL, parameters, holder);
-            int id = (int) holder.getKeyList().get(0).get("HUB_EXERCISE_ID");
+            int id = holder.getKey().intValue();
             repository.saveExerciseSat(id, exercise.getGrade(), exercise.getApprovalDate(), exercise.getTitle());
             repository.saveExerciseLink(id, exercise.getSubjectId());
             return id;

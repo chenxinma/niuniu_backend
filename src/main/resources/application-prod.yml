@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-bp1908l253kv91l52125010.mysql.rds.aliyuncs.com:3306/study?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: study
+    password: Study1234
+  jackson:
+    time-zone: GMT+8
+
+server:
+  port: 4567
+
+swagger:
+  try-host: http://47.99.189.70

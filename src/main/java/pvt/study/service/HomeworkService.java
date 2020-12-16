@@ -40,7 +40,7 @@ public class HomeworkService {
             String INSERT_SQL = "insert into hub_homework(publish_date, load_time, load_source) " +
                     "VALUES (:publish_date, :load_time, :load_source)";
             namedParameterJdbcTemplate.update(INSERT_SQL, parameters, holder);
-            int id = (int) holder.getKeyList().get(0).get("HUB_HOMEWORK_ID");
+            int id =holder.getKey().intValue();
             repository.saveHomeworkSat(id, homework.getBeginTime(), homework.getCompleteTime());
             repository.saveHomeworkLink(id, homework.getSubjectId());
             return id;

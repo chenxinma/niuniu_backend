@@ -1,0 +1,13 @@
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./niuniu
+    username: sa
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+
+swagger:
+  try-host: http://localhost:${server.port}
