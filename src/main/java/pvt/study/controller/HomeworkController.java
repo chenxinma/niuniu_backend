@@ -24,17 +24,24 @@ public class HomeworkController {
     HomeworkService service;
 
     @PostMapping("/homework")
-    public ResponseEntity<Integer> addHomework(@RequestBody NewHomework homework) {
+    public ResponseEntity<Integer> addHomework(@RequestBody NewHomework homework,
+                                               @RequestHeader(value="User-Agent", defaultValue="foo") String userAgent) {
         if (!homework.isValid()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        int id = service.save(homework);
+        int id = service.save(homework, userAgent);
         return ResponseEntity.ok(id);
     }
 
     @DeleteMapping("/homework/{id}/time_range")
     public ResponseEntity<Integer> clearCompleteTime(@PathVariable("id") int id) {
         service.clearTime(id);
+        return ResponseEntity.ok(id);
+    }
+
+    @DeleteMapping("/homework/{id}")
+    public ResponseEntity<Integer> deleteHomework(@PathVariable("id") int id) {
+        service.delete(id);
         return ResponseEntity.ok(id);
     }
 
@@ -51,6 +58,15 @@ public class HomeworkController {
     public List<Homework> findByPublishDate(@RequestParam(name = "publishDate")
                                             @DateTimeFormat(pattern="yyyy-MM-dd") Date publishDate) {
         List<Homework> homeworkList = service.findByPublishDate(publishDate);
+        return homeworkList;
+    }
+
+    @GetMapping("/homework_fetch")
+    public List<Homework> findByPublishDateRange(@RequestParam(name = "begin")
+                                                 @DateTimeFormat(pattern="yyyy-MM-dd") Date begin,
+                                                 @RequestParam(name = "end")
+                                                 @DateTimeFormat(pattern="yyyy-MM-dd") Date end){
+        List<Homework> homeworkList = service.findByPublishDateRange(begin, end);
         return homeworkList;
     }
 }

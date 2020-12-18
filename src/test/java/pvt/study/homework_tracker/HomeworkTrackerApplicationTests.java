@@ -37,7 +37,7 @@ class HomeworkTrackerApplicationTests {
 		homework.setSubjectId(1);
 		homework.setBeginTime(new Date());
 		homework.setCompleteTime(new Date());
-		service.save(homework);
+		service.save(homework, "TEST");
 	}
 
 	@Test

@@ -24,11 +24,12 @@ public class ExerciseController {
     ExerciseService service;
 
     @PostMapping("/exercise")
-    public ResponseEntity<Integer> addExercise(@RequestBody NewExercise exercise) {
+    public ResponseEntity<Integer> addExercise(@RequestBody NewExercise exercise,
+                                               @RequestHeader(value="User-Agent", defaultValue="foo") String userAgent) {
         if (!exercise.isValid()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        int id = service.save(exercise);
+        int id = service.save(exercise, userAgent);
         return ResponseEntity.ok(id);
     }
 

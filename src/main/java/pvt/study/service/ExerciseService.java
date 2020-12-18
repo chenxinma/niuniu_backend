@@ -1,6 +1,7 @@
 package pvt.study.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -30,17 +31,22 @@ public class ExerciseService {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Transactional
-    public int save(NewExercise exercise) {
+    public int save(NewExercise exercise, String loadSource) {
         if (exercise.getId() == null) {
             KeyHolder holder = new GeneratedKeyHolder();
             SqlParameterSource parameters = new MapSqlParameterSource()
                     .addValue("load_time", new Date())
-                    .addValue("load_source", ExerciseService.class.getName());
+                    .addValue("load_source", loadSource);
             String INSERT_SQL = "INSERT INTO HUB_EXERCISE " +
                     "(LOAD_TIME, LOAD_SOURCE) " +
                     "VALUES(:load_time, :load_source)";
             namedParameterJdbcTemplate.update(INSERT_SQL, parameters, holder);
-            int id = holder.getKey().intValue();
+            int id;
+            try {
+                id = holder.getKey().intValue();
+            } catch ( InvalidDataAccessApiUsageException e ) {
+                id = (int)holder.getKeyList().get(0).get("HUB_EXERCISE_ID");
+            }
             repository.saveExerciseSat(id, exercise.getGrade(), exercise.getApprovalDate(), exercise.getTitle());
             repository.saveExerciseLink(id, exercise.getSubjectId());
             return id;

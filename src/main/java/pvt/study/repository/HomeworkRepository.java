@@ -30,6 +30,15 @@ public interface HomeworkRepository extends Repository<Homework, Integer> {
             " FROM hub_homework hhw " +
             "  inner join sat_homework shw " +
             "  on hhw.hub_homework_id =shw.hub_homework_id " +
+            " WHERE hhw.publish_date BETWEEN :begin AND :end " +
+            "ORDER BY hhw.publish_date")
+    List<Homework> findByPublishDateRange(@Param("begin") Date begin, @Param("end") Date end);
+
+    @Query("SELECT " +
+            " hhw.hub_homework_id as id, hhw.publish_date, shw.begin_time, shw.complete_time " +
+            " FROM hub_homework hhw " +
+            "  inner join sat_homework shw " +
+            "  on hhw.hub_homework_id =shw.hub_homework_id " +
             " WHERE hhw.publish_date = :publish_date")
     List<Homework> findByPublishDate(@Param("publish_date") Date publishDate);
 
