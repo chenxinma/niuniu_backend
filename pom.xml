@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pvt.study</groupId>
 	<artifactId>homework_tracker</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>homework_tracker</name>
 	<description>Demo project for Spring Boot</description>
 
